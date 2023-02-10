@@ -1,20 +1,21 @@
 from collections import deque
 
 class Node:
-    def __init__(self, tower1 : deque, tower2 : deque, tower3 : deque, parent) -> None:
-        self.tower1 = tower1
-        self.tower2 = tower2
-        self.tower3 = tower3
+    def __init__(self, towers, parent) -> None:
+        self.towers = towers
         self.parent = parent
     
     def __eq__(self, __o: object) -> bool:
-        if self.tower1 == __o.tower1 and self.tower2 == __o.tower2 and self.tower3 == __o.tower3:
+        if self.towers == __o.towers:
             return True
         else:
             return False
         
     def __str__(self) -> str:
-        return f"State: [{self.tower1}, {self.tower2}, {self.tower3}], Parent: {self.parent}"
+        output = f"State: "
+        for t in self.towers:
+            output += f"{t}, "
+        return output[:-2]
         
     def get_state(self):
-        return [self.tower1, self.tower2, self.tower3]
+        return self.towers

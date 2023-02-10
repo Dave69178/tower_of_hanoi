@@ -9,7 +9,7 @@ def make_move_from_a_to_b(node : Node, a : int, b : int):
     return state
 
 def get_new_node_from_move(node: Node, a : int, b : int):
-    return Node(*make_move_from_a_to_b(node, a, b), node)
+    return Node(make_move_from_a_to_b(node, a, b), node)
 
 def expand_node(node : Node):
     children = []
@@ -44,7 +44,7 @@ def get_path_to_node(node : Node):
 
 def search(initial_state, goal_state, search_type="bfs"):
     fringe = deque()
-    fringe.append(Node(*initial_state, None))
+    fringe.append(Node(initial_state, None))
 
     if search_type == "bfs":
         while True:
@@ -55,7 +55,7 @@ def search(initial_state, goal_state, search_type="bfs"):
                     if not is_node_state_in_path(child):
                         # The state has not been reached before in this path, thus add to fringe
                         fringe.appendleft(child)
-                        if child == Node(*goal_state,None):
+                        if child == Node(goal_state,None):
                              yield get_path_to_node(child)
     elif search_type == "dfs":
         while True:
@@ -66,5 +66,5 @@ def search(initial_state, goal_state, search_type="bfs"):
                     if not is_node_state_in_path(child):
                         # The state has not been reached before in this path, thus add to fringe
                         fringe.appendleft(child)
-                        if child == Node(*goal_state,None):
+                        if child == Node(goal_state,None):
                             yield get_path_to_node(child)
